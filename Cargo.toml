@@ -1,7 +1,7 @@
 [package]
 name = "link-bridge"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 authors = ["Jeremiah Russell <jrussell@jerus.ie>"]
 description = "A lightweight Rust library for creating URL redirects with short names that generate web pages redirecting to longer links on your website."
 rust-version = "1.70.0"
