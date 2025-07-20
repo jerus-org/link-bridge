@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- ✨ add redirector module for URL shortening(pr [#5])
+
 ### Changed
 
 - Create FUNDING.yml(pr [#3])
@@ -16,3 +20,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#3]: https://github.com/jerus-org/link-bridge/pull/3
 [#1]: https://github.com/jerus-org/link-bridge/pull/1
 [#4]: https://github.com/jerus-org/link-bridge/pull/4
+[#5]: https://github.com/jerus-org/link-bridge/pull/5
