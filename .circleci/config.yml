@@ -66,6 +66,7 @@ workflows:
           min_rust_version: << pipeline.parameters.min-rust-version >>
       - toolkit/security:
           context: SonarCloud
+          sonarcloud: false
       - toolkit/update_changelog:
           requires:
             - toolkit/required_builds
