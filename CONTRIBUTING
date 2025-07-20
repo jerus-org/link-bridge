@@ -4,7 +4,7 @@ Thank you for your interest in contributing to link-bridge! We welcome contribut
 
 ## Code of Conduct
 
-This project adheres to a code of conduct adapted from the [Contributor Covenant](https://www.contributor-covenant.org/). By participating, you are expected to uphold this code. Please report unacceptable behavior to the maintainers.
+This project adheres to a code of conduct adapted from the [Contributor Covenant](https://www.contributor-covenant.org/). By participating, you are expected to uphold this code. Please report unacceptable behaviour to the maintainers.
 
 ## How to Contribute
 
@@ -14,7 +14,7 @@ Before creating a bug report, please check the existing issues to avoid duplicat
 
 - A clear, descriptive title
 - Steps to reproduce the issue
-- Expected vs actual behavior  
+- Expected vs actual behaviour  
 - Your environment (OS, Rust version, link-bridge version)
 - Minimal code example demonstrating the issue
 - Relevant error messages or logs
@@ -30,10 +30,10 @@ Brief description of the bug
 2. 
 3. 
 
-## Expected Behavior
+## Expected behaviour
 What should happen
 
-## Actual Behavior
+## Actual behaviour
 What actually happens
 
 ## Environment
