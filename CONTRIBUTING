@@ -1,0 +1,218 @@
+# Contributing to link-bridge
+
+Thank you for your interest in contributing to link-bridge! We welcome contributions from everyone, whether you're fixing a typo, adding a feature, or improving documentation.
+
+## Code of Conduct
+
+This project adheres to a code of conduct adapted from the [Contributor Covenant](https://www.contributor-covenant.org/). By participating, you are expected to uphold this code. Please report unacceptable behavior to the maintainers.
+
+## How to Contribute
+
+### Reporting Bugs
+
+Before creating a bug report, please check the existing issues to avoid duplicates. When creating a bug report, include:
+
+- A clear, descriptive title
+- Steps to reproduce the issue
+- Expected vs actual behavior  
+- Your environment (OS, Rust version, link-bridge version)
+- Minimal code example demonstrating the issue
+- Relevant error messages or logs
+
+**Use this template:**
+
+```markdown
+## Bug Description
+Brief description of the bug
+
+## Steps to Reproduce
+1. 
+2. 
+3. 
+
+## Expected Behavior
+What should happen
+
+## Actual Behavior
+What actually happens
+
+## Environment
+- OS: 
+- Rust version: `rustc --version`
+- link-bridge version: 
+- Web framework (if applicable): 
+
+## Code Example
+```rust
+// Minimal example demonstrating the issue
+```
+
+## Additional Context
+Any other relevant information
+```
+
+### Suggesting Features
+
+We welcome feature suggestions! Please:
+
+- Check existing issues/discussions for similar requests
+- Clearly describe the use case and motivation
+- Provide examples of how the feature would be used
+- Consider backwards compatibility implications
+
+### Contributing Code
+
+#### Development Setup
+
+1. **Fork the repository** on GitHub
+2. **Clone your fork** locally:
+   ```bash
+   git clone https://github.com/jerus-org/link-bridge.git
+   cd link-bridge
+   ```
+
+3. **Set up the development environment:**
+   ```bash
+   # Install Rust (if not already installed)
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   
+   # Install required tools
+   rustup component add rustfmt clippy
+   cargo install cargo-tarpaulin  # For code coverage
+   ```
+
+4. **Create a feature branch:**
+   ```bash
+   git checkout -b feature/your-feature-name
+   # or
+   git checkout -b fix/issue-number
+   ```
+
+#### Code Standards
+
+We maintain high code quality standards:
+
+**Formatting & Linting:**
+```bash
+# Format code (must pass)
+cargo fmt
+
+# Run clippy (must pass with no warnings)
+cargo clippy -- -D warnings
+
+# Run tests (must pass)
+cargo test
+
+# Check documentation builds
+cargo doc --no-deps
+```
+
+**Code Style Guidelines:**
+
+- Follow standard Rust conventions and idioms
+- Use `rustfmt` for consistent formatting  
+- Address all `clippy` warnings
+- Write clear, self-documenting code with meaningful names
+- Add comments for complex logic or non-obvious behaviour
+- Prefer explicit error handling over `unwrap()` or `expect()`
+
+**Documentation:**
+
+- Document all public APIs with `///` doc comments
+- Include examples in doc comments where helpful
+- Update README.md for user-facing changes
+- Add entries to CHANGELOG.md following [Keep a Changelog](https://keepachangelog.com/)
+
+**Testing:**
+
+- Write unit tests for new functionality
+- Include integration tests for significant features
+- Ensure tests are deterministic and can run in parallel
+- Aim for meaningful test coverage (check with `cargo tarpaulin`)
+- Test error conditions and edge cases
+
+#### Making Changes
+
+1. **Keep changes focused** - one logical change per PR
+2. **Write clear commit messages:**
+   ```
+   Add support for custom redirect delays
+   
+   - Allow configuring redirect delay in RedirectConfig
+   - Update HTML template to use configured delay
+   - Add tests for delay configuration
+   - Update documentation with delay examples
+   
+   Fixes #123
+   ```
+
+3. **Update documentation** for user-facing changes
+4. **Add tests** for new functionality
+
+#### Submitting Changes
+
+1. **Push your changes:**
+   ```bash
+   git push origin your-branch-name
+   ```
+
+2. **Create a Pull Request** with:
+   - Clear title describing the change
+   - Detailed description explaining what and why
+   - Reference any related issues (`Fixes #123`, `Closes #456`)
+   - Screenshots for UI changes (if applicable)
+
+3. **Respond to feedback** promptly and make requested changes
+
+## Development Workflow
+
+### Running Tests
+
+```bash
+# Run all tests
+cargo test
+
+# Run tests with output
+cargo test -- --nocapture
+
+# Run specific test
+cargo test test_function_name
+
+# Run tests with coverage
+cargo tarpaulin --out html
+```
+
+### Benchmarking
+
+```bash
+# Run benchmarks (if available)
+cargo bench
+
+# Profile with specific benchmark
+cargo bench -- benchmark_name
+```
+
+### Debugging
+
+```bash
+# Run with debug logging
+RUST_LOG=debug cargo test
+
+# Run specific test with logging
+RUST_LOG=link_bridge=trace cargo test test_name -- --nocapture
+```
+
+## Getting Help
+
+- **Questions about contributing?** Open a discussion on GitHub
+- **Need help with setup?** Create an issue with the "help wanted" label
+- **Want to discuss a large change?** Open an issue first to discuss the approach
+
+## Recognition
+
+Contributors are recognized in several ways:
+
+- Mentioned in release notes for their contributions
+- GitHub contributor statistics
+
+Thank you for helping make link-bridge better! 🦀
