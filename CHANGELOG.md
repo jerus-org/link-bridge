@@ -10,5 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Create FUNDING.yml(pr [#3])
+- Configure Mend Bolt for GitHub(pr [#1])
 
 [#3]: https://github.com/jerus-org/link-bridge/pull/3
+[#1]: https://github.com/jerus-org/link-bridge/pull/1
