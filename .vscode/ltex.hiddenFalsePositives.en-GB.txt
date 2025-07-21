@@ -1,2 +1,3 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlink-bridge\\E$"}
 {"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q[Crates.io]crates-url [Documentation]docs-url [circleci-badge]circleci-url [MIT licensed]mit-url [Rust 1.81+]version-url [BuyMeaCoffee]bmac-url [GitHubSponsors]ghub-url\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q📚 Documentation on docs.rs\\E$"}
