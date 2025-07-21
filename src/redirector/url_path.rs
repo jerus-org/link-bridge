@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 use once_cell::sync::Lazy;
 use regex::Regex;
 use thiserror::Error;
@@ -35,6 +37,12 @@ impl UrlPath {
 
     pub(crate) fn encode_utf16(&self) -> Vec<u16> {
         self.0.encode_utf16().collect()
+    }
+}
+
+impl Display for UrlPath {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.0)
     }
 }
 
@@ -180,5 +188,19 @@ mod tests {
         let debug_output = format!("{error:?}");
         assert!(debug_output.contains("InvalidPath"));
         assert!(debug_output.contains("invalid-path"));
+    }
+
+    #[test]
+    fn test_url_path_display() {
+        let path = UrlPath::new("api/v1".to_string()).unwrap();
+        let display_output = format!("{path}");
+        assert_eq!(display_output, "/api/v1/");
+    }
+
+    #[test]
+    fn test_url_path_display_complex() {
+        let path = UrlPath::new("api/v2/users/123".to_string()).unwrap();
+        let display_output = format!("{path}");
+        assert_eq!(display_output, "/api/v2/users/123/");
     }
 }
