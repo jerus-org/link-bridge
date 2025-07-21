@@ -222,6 +222,7 @@ mod tests {
         let file_path = format!("s/{file_name}");
         if Path::new(&file_path).exists() {
             fs::remove_file(&file_path).ok();
+            fs::remove_dir("s").ok();
         }
     }
 
