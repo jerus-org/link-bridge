@@ -20,9 +20,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - 🐛 tests: clean up test directory after file removal(pr [#6])
+- 🐛 url_path: correct regex to include hash character(pr [#7])
 
 [#3]: https://github.com/jerus-org/link-bridge/pull/3
 [#1]: https://github.com/jerus-org/link-bridge/pull/1
 [#4]: https://github.com/jerus-org/link-bridge/pull/4
 [#5]: https://github.com/jerus-org/link-bridge/pull/5
 [#6]: https://github.com/jerus-org/link-bridge/pull/6
+[#7]: https://github.com/jerus-org/link-bridge/pull/7
