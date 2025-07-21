@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 🌐 i18n(contributing): update spelling to en-GB in contributing guide(pr [#4])
 - 📝 docs(url_path)-add module-level documentation for UrlPath utilities(pr [#8])
 - 📝 docs(redirector)-enhance module documentation(pr [#9])
+- 📝 docs(lib)-add comprehensive documentation for link-bridge(pr [#10])
 
 ### Fixed
 
@@ -32,3 +33,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#7]: https://github.com/jerus-org/link-bridge/pull/7
 [#8]: https://github.com/jerus-org/link-bridge/pull/8
 [#9]: https://github.com/jerus-org/link-bridge/pull/9
+[#10]: https://github.com/jerus-org/link-bridge/pull/10
