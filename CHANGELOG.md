@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 📝 BREAKING: docs(README)-update badge URLs and enhance documentation(pr [#11])
 - 👷 ci(circleci)-remove unnecessary parameters from save_next_version job(pr [#12])
 - 👷 ci(circleci)-remove unused parameters from config(pr [#13])
+- 🔧 chore(release)-add release configuration file(pr [#14])
 
 ### Fixed
 
@@ -40,3 +41,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#11]: https://github.com/jerus-org/link-bridge/pull/11
 [#12]: https://github.com/jerus-org/link-bridge/pull/12
 [#13]: https://github.com/jerus-org/link-bridge/pull/13
+[#14]: https://github.com/jerus-org/link-bridge/pull/14
