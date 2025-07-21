@@ -1,3 +1,30 @@
+//! URL redirection system for generating short links and HTML redirect pages.
+//!
+//! This module provides the core functionality for creating URL redirects by:
+//! - Validating and normalizing URL paths
+//! - Generating unique short file names using base62 encoding
+//! - Creating HTML redirect pages with meta refresh and JavaScript fallbacks
+//! - Writing redirect files to the filesystem
+//!
+//! # Example Usage
+//!
+//! ```rust
+//! use link_bridge::Redirector;
+//! use std::fs;
+//!
+//! // Create a redirector for a URL path
+//! let mut redirector = Redirector::new("api/v1/users").unwrap();
+//!
+//! // Optionally set a custom output directory
+//! redirector.set_path("doc_test_output");
+//!
+//! // Write the redirect HTML file
+//! redirector.write_redirects().unwrap();
+//!
+//! // Clean up test files
+//! fs::remove_dir_all("doc_test_output").ok();
+//! ```
+
 mod url_path;
 
 use std::ffi::OsString;
@@ -11,48 +38,97 @@ use chrono::Utc;
 
 use crate::redirector::url_path::UrlPath;
 
+/// Errors that can occur during redirect operations.
 #[derive(Debug, Error)]
 pub enum RedirectorError {
+    /// An I/O error occurred while creating or writing redirect files.
+    ///
+    /// This includes errors like permission denied, disk full, or invalid file paths.
     #[error("Failed to create redirect file")]
     FileCreationError(#[from] std::io::Error),
+
+    /// The short link has not been generated (should not occur in normal usage).
+    ///
+    /// This error is included for completeness but should not happen since
+    /// short links are automatically generated during `Redirector::new()`.
     #[error("Short link not found")]
     ShortLinkNotFound,
+
+    /// The provided URL path is invalid.
+    ///
+    /// This occurs when the path contains invalid characters like query parameters (?),
+    /// semicolons (;), or other forbidden characters.
     #[error("Invalid URL path: {0}")]
     InvalidUrlPath(#[from] url_path::UrlPathError),
 }
 
-/// The `Redirector` struct is responsible for managing URL redirection.
+/// Manages URL redirection by generating short links and HTML redirect pages.
 ///
-/// It allows you to create a short link from a long URL on your website,
-/// generate the HTML for redirection, and write the redirection HTML file
-/// to the filesystem.
+/// The `Redirector` creates HTML files that automatically redirect users to longer URLs
+/// on your website. It handles the entire process from URL validation to file generation.
 ///
-/// It also provides functionality to set the directory path for storing
-/// redirect files.
+/// # Key Features
 ///
-/// It uses base62 encoding for generating short links based on the current
-/// timestamp and the long URL's characters.
+/// - **URL Validation**: Ensures paths contain only valid characters
+/// - **Unique Naming**: Generates unique file names using base62 encoding and timestamps
+/// - **HTML Generation**: Creates complete HTML pages with meta refresh and JavaScript fallbacks
+/// - **File Management**: Handles directory creation and file writing operations
 ///
+/// # Short Link Generation
+///
+/// Short file names are generated using:
+/// - Current timestamp in milliseconds
+/// - Sum of UTF-16 code units from the URL path
+/// - Base62 encoding for compact, URL-safe names
+/// - `.html` extension for web server compatibility
+///
+/// # HTML Output
+///
+/// Generated HTML files include:
+/// - Meta refresh tag for immediate redirection
+/// - JavaScript fallback for better compatibility
+/// - User-friendly link for manual navigation
+/// - Proper HTML5 structure and encoding
 #[derive(Debug, Clone, PartialEq, Default)]
 pub struct Redirector {
-    /// The path to the long URL that will be shortened.
+    /// The validated and normalized URL path to redirect to.
     long_path: UrlPath,
-    /// The file name for the short link.
+    /// The generated short file name (including .html extension).
     short_file_name: OsString,
-    /// The path where the redirect HTML files will be stored.
+    /// The directory path where redirect HTML files will be stored.
     path: PathBuf,
 }
 
 impl Redirector {
-    /// Creates a new `Redirector` instance with the specified long link.
+    /// Creates a new `Redirector` instance for the specified URL path.
+    ///
+    /// Validates the provided path and automatically generates a unique short file name.
+    /// The redirector is initialized with a default output directory of "s".
     ///
     /// # Arguments
     ///
-    /// * `long_link` - The original URL to be shortened
+    /// * `long_path` - The URL path to create a redirect for (e.g., "api/v1/users")
     ///
     /// # Returns
     ///
-    /// Returns a new `Redirector` instance with default path "s" and no short link.
+    /// * `Ok(Redirector)` - A configured redirector ready to generate redirect files
+    /// * `Err(RedirectorError::InvalidUrlPath)` - If the path contains invalid characters
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use link_bridge::Redirector;
+    ///
+    /// // Valid paths
+    /// let redirector1 = Redirector::new("api/v1").unwrap();
+    /// let redirector2 = Redirector::new("/docs/getting-started/").unwrap();
+    /// let redirector3 = Redirector::new("user-profile").unwrap();
+    ///
+    /// // Invalid paths (will return errors)
+    /// assert!(Redirector::new("api?param=value").is_err()); // Query parameters
+    /// assert!(Redirector::new("api;session=123").is_err());  // Semicolons
+    /// assert!(Redirector::new("").is_err());                 // Empty string
+    /// ```
     pub fn new<S: ToString>(long_path: S) -> Result<Self, RedirectorError> {
         let long_path = UrlPath::new(long_path.to_string())?;
 
@@ -65,10 +141,23 @@ impl Redirector {
         })
     }
 
-    /// Generates a short link based on the current timestamp and the long link's characters.
+    /// Generates a unique short file name based on timestamp and URL path content.
     ///
-    /// The short link is created using base62 encoding of a combination of the current
-    /// timestamp in milliseconds and the sum of UTF-16 code units of the long link.
+    /// Creates a unique identifier by combining the current timestamp with the URL path's
+    /// UTF-16 character values, then encoding the result using base62 for a compact,
+    /// URL-safe file name.
+    ///
+    /// # Algorithm
+    ///
+    /// 1. Get current timestamp in milliseconds
+    /// 2. Sum all UTF-16 code units from the URL path
+    /// 3. Add timestamp and UTF-16 sum together
+    /// 4. Encode the result using base62 (0-9, A-Z, a-z)
+    /// 5. Append ".html" extension
+    ///
+    /// # Returns
+    ///
+    /// An `OsString` containing the generated file name with `.html` extension.
     fn generate_short_file_name(long_path: &UrlPath) -> OsString {
         let name = base62::encode(
             Utc::now().timestamp_millis() as u64
@@ -77,28 +166,74 @@ impl Redirector {
         OsString::from(format!("{name}.html"))
     }
 
-    /// Sets the directory path where redirect files will be stored.
+    /// Sets the output directory where redirect HTML files will be stored.
+    ///
+    /// By default, redirector uses "s" as the output directory. Use this method
+    /// to specify a custom directory path. The directory will be created automatically
+    /// when `write_redirects()` is called if it doesn't exist.
     ///
     /// # Arguments
     ///
-    /// * `path` - A string-like value that specifies the directory path
+    /// * `path` - A path-like value (String, &str, PathBuf, etc.) specifying the directory
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use link_bridge::Redirector;
+    ///
+    /// let mut redirector = Redirector::new("api/v1").unwrap();
+    ///
+    /// // Set various types of paths
+    /// redirector.set_path("redirects");           // &str
+    /// redirector.set_path("output/html".to_string()); // String
+    /// redirector.set_path(std::path::PathBuf::from("custom/path")); // PathBuf
+    /// ```
     pub fn set_path<P: Into<PathBuf>>(&mut self, path: P) {
         self.path = path.into();
     }
 
     /// Writes the redirect HTML file to the filesystem.
     ///
-    /// Creates the directory if it doesn't exist and generates an HTML file
-    /// containing redirect logic for the shortened URL.
+    /// Creates the output directory (if it doesn't exist) and generates a complete
+    /// HTML redirect page that automatically redirects users to the target URL.
+    /// The file name is the automatically generated short name with `.html` extension.
+    ///
+    /// # File Structure
+    ///
+    /// The generated HTML includes:
+    /// - DOCTYPE and proper HTML5 structure
+    /// - Meta charset and refresh tags for immediate redirection
+    /// - JavaScript fallback for better browser compatibility
+    /// - User-friendly fallback link for manual navigation
     ///
     /// # Returns
     ///
-    /// Returns `Ok(())` if successful, or a `RedirectorError` if any operation fails.
+    /// * `Ok(())` - If the file was successfully created and written
+    /// * `Err(RedirectorError::FileCreationError)` - If file operations fail
     ///
     /// # Errors
     ///
-    /// Will return `RedirectorError::FileCreationError` if file operations fail.
-    /// Will return `RedirectorError::ShortLinkNotFound` if no short link has been generated.
+    /// Common causes of `FileCreationError`:
+    /// - Permission denied (insufficient write permissions)
+    /// - Disk full or insufficient space
+    /// - Invalid characters in the file path
+    /// - Parent directory cannot be created
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use link_bridge::Redirector;
+    /// use std::fs;
+    ///
+    /// let mut redirector = Redirector::new("api/v1/users").unwrap();
+    /// redirector.set_path("doc_test_redirects");
+    /// 
+    /// // This creates: doc_test_redirects/{unique_name}.html
+    /// redirector.write_redirects().unwrap();
+    /// 
+    /// // Clean up after the test
+    /// fs::remove_dir_all("doc_test_redirects").ok();
+    /// ```
     pub fn write_redirects(&self) -> Result<(), RedirectorError> {
         // create store directory if it doesn't exist
         if !Path::new(&self.path).exists() {
@@ -117,6 +252,15 @@ impl Redirector {
 }
 
 impl fmt::Display for Redirector {
+    /// Generates the complete HTML redirect page content.
+    ///
+    /// Creates a standard HTML5 page that redirects to the target URL using
+    /// multiple methods for maximum compatibility:
+    /// - Meta refresh tag (works in all browsers)
+    /// - JavaScript redirect (faster, works when JS is enabled)
+    /// - Fallback link (for manual navigation if automatic redirect fails)
+    ///
+    /// The HTML follows web standards and includes proper accessibility features.
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let target = self.long_path.to_string();
         write!(
