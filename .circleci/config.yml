@@ -124,8 +124,6 @@ workflows:
             - bot-check
           ssh_fingerprint: << pipeline.parameters.fingerprint >>
           min_rust_version: << pipeline.parameters.min-rust-version >>
-          package: nextsv
-          when_use_workspace: false
 
       - toolkit/no_release:
           min_rust_version: << pipeline.parameters.min-rust-version >>
