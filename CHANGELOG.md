@@ -7,15 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2025-07-21
+
 ### Added
 
 - ✨ add redirector module for URL shortening(pr [#5])
 
 ### Changed
 
-- Create FUNDING.yml(pr [#3])
-- Configure Mend Bolt for GitHub(pr [#1])
-- 🌐 i18n(contributing): update spelling to en-GB in contributing guide(pr [#4])
 - 📝 docs(url_path)-add module-level documentation for UrlPath utilities(pr [#8])
 - 📝 docs(redirector)-enhance module documentation(pr [#9])
 - 📝 docs(lib)-add comprehensive documentation for link-bridge(pr [#10])
@@ -27,6 +26,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - 🐛 tests: clean up test directory after file removal(pr [#6])
 - 🐛 url_path: correct regex to include hash character(pr [#7])
+
+## [0.1.0] - 2025-07-20
+
+### Changed
+
+- Create FUNDING.yml(pr [#3])
+- Configure Mend Bolt for GitHub(pr [#1])
+- 🌐 i18n(contributing): update spelling to en-GB in contributing guide(pr [#4])
 
 [#3]: https://github.com/jerus-org/link-bridge/pull/3
 [#1]: https://github.com/jerus-org/link-bridge/pull/1
@@ -40,3 +47,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#11]: https://github.com/jerus-org/link-bridge/pull/11
 [#12]: https://github.com/jerus-org/link-bridge/pull/12
 [#13]: https://github.com/jerus-org/link-bridge/pull/13
+[Unreleased]: https://github.com/jerus-org/nextsv/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/jerus-org/nextsv/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/jerus-org/nextsv/releases/tag/v0.1.0
