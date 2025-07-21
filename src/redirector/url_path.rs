@@ -1,21 +1,62 @@
+//! URL path validation and normalization utilities.
+//!
+//! This module provides the `UrlPath` type for validating and normalizing URL paths
+//! used in the redirect system. It ensures paths contain only valid characters and
+//! are properly formatted with leading and trailing slashes.
+
 use std::fmt::Display;
 
 use once_cell::sync::Lazy;
 use regex::Regex;
 use thiserror::Error;
 
+/// Errors that can occur when working with URL paths.
 #[derive(Debug, Error)]
 pub enum UrlPathError {
-    /// the provided path is not a valid url path consisting of
-    /// letters, digits, and dashes
+    /// The provided path is not a valid URL path.
+    ///
+    /// Valid URL paths must consist of letters, digits, and dashes, separated by forward slashes.
+    /// They cannot contain query parameters (?), fragment identifiers (#), or semicolons (;).
     #[error("Invalid URL path: {0}")]
     InvalidPath(String),
 }
 
+/// A validated and normalized URL path.
+///
+/// This struct represents a URL path that has been validated to ensure it contains
+/// only valid characters and is properly normalized with leading and trailing slashes.
+/// The path is automatically normalized to include leading and trailing forward slashes.
 #[derive(Debug, Default, PartialEq, Clone)]
 pub(crate) struct UrlPath(String);
 
 impl UrlPath {
+    /// Creates a new `UrlPath` from a string, validating and normalizing it.
+    ///
+    /// This method validates that the provided path contains only valid URL path characters
+    /// (letters, digits, hyphens, and forward slashes) and normalizes it by ensuring it
+    /// starts and ends with forward slashes.
+    ///
+    /// # Arguments
+    ///
+    /// * `path` - The URL path string to validate and normalize
+    ///
+    /// # Returns
+    ///
+    /// * `Ok(UrlPath)` - If the path is valid and has been normalized
+    /// * `Err(UrlPathError::InvalidPath)` - If the path contains invalid characters
+    ///
+    /// # Valid Paths
+    ///
+    /// - `"api/v1"` → normalized to `"/api/v1/"`
+    /// - `"/api/v1/"` → remains `"/api/v1/"`
+    /// - `"user-data/profile"` → normalized to `"/user-data/profile/"`
+    ///
+    /// # Invalid Paths
+    ///
+    /// - `"api?param=value"` (contains query parameter)
+    /// - `"api;session=123"` (contains semicolon)
+    /// - `""` (empty string)
+    /// - `"/"` (root only)
     pub(crate) fn new(path: String) -> Result<Self, UrlPathError> {
         static RE: Lazy<Regex> = Lazy::new(|| Regex::new(r"^/?[^/;#?]+(?:/[^/;#?]+)*/?$").unwrap());
 
@@ -35,12 +76,25 @@ impl UrlPath {
         Ok(UrlPath(path))
     }
 
+    /// Encodes the URL path as UTF-16.
+    ///
+    /// This method converts the internal path string to a vector of UTF-16 code units,
+    /// which can be useful for generating hash values or other operations that require
+    /// numeric representation of the path.
+    ///
+    /// # Returns
+    ///
+    /// A vector of UTF-16 code units representing the path string.
     pub(crate) fn encode_utf16(&self) -> Vec<u16> {
         self.0.encode_utf16().collect()
     }
 }
 
 impl Display for UrlPath {
+    /// Formats the URL path for display.
+    ///
+    /// Returns the normalized path string including leading and trailing slashes.
+    /// For example, a path created from `"api/v1"` will display as `"/api/v1/"`.
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.0)
     }
