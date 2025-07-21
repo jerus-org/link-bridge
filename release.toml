@@ -7,7 +7,6 @@ consolidate-commits = true
 allow-branch = ["main"]
 pre-release-replacements = [
     { file = "README.md", search = "link-bridge = .*", replace = "{{crate_name}} = \"{{version}}\"" },
-    { file = "README.md", search = "link-bridge 0.*", replace = "{{crate_name}} {{version}}" },
     { file = "src/lib.rs", search = "link-bridge = .*", replace = "{{crate_name}} = \"{{version}}\"" },
     { file = "CHANGELOG.md", search = "## \\[Unreleased\\]", replace = "## [{{version}}] - {{date}}", exactly = 1 },
     { file = "CHANGELOG.md", search = "\\[Unreleased\\]:", replace = "[{{version}}]:", exactly = 1 },
