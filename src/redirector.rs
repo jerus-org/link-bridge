@@ -1,3 +1,5 @@
+mod url_path;
+
 use std::fs::File;
 use std::io::Write;
 use std::path::Path;
@@ -6,17 +8,34 @@ use thiserror::Error;
 
 use chrono::Utc;
 
+use crate::redirector::url_path::UrlPath;
+
 #[derive(Debug, Error)]
 pub enum RedirectorError {
     #[error("Failed to create redirect file")]
     FileCreationError(#[from] std::io::Error),
     #[error("Short link not found")]
     ShortLinkNotFound,
+    #[error("Invalid URL path: {0}")]
+    InvalidUrlPath(#[from] url_path::UrlPathError),
 }
 
-#[derive(Debug, Clone, Default, PartialEq, Eq)]
+/// The `Redirector` struct is responsible for managing URL redirection.
+///
+/// It allows you to create a short link from a long URL on your website,
+/// generate the HTML for redirection, and write the redirection HTML file
+/// to the filesystem.
+///
+/// It also provides functionality to set the directory path for storing
+/// redirect files.
+///
+/// It uses base62 encoding for generating short links based on the current
+/// timestamp and the long URL's characters.
+///
+#[derive(Debug, Clone, PartialEq, Default)]
 pub struct Redirector {
-    long_link: String,
+    /// The path to the long URL that will be shortened.
+    long_path: UrlPath,
     short_link: Option<String>,
     path: String,
 }
@@ -31,12 +50,14 @@ impl Redirector {
     /// # Returns
     ///
     /// Returns a new `Redirector` instance with default path "s" and no short link.
-    pub fn new(long_link: String) -> Self {
-        Redirector {
-            long_link,
+    pub fn new<S: ToString>(long_link: S) -> Result<Self, RedirectorError> {
+        let long_link = UrlPath::new(long_link.to_string())?;
+
+        Ok(Redirector {
+            long_path: long_link,
             short_link: None,
             path: "s".to_string(),
-        }
+        })
     }
 
     /// Generates a short link based on the current timestamp and the long link's characters.
@@ -46,7 +67,7 @@ impl Redirector {
     pub fn generate_short_link(&mut self) {
         let short_link = base62::encode(
             Utc::now().timestamp_millis() as u64
-                + self.long_link.encode_utf16().sum::<u16>() as u64,
+                + self.long_path.encode_utf16().iter().sum::<u16>() as u64,
         );
         self.short_link = Some(short_link);
     }
@@ -122,5 +143,162 @@ impl fmt::Display for Redirector {
         } else {
             write!(f, "Short link not generated")
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::fs;
+    use std::thread;
+    use std::time::Duration;
+
+    #[test]
+    fn test_new_redirector() {
+        let long_link = "/some/path";
+        let redirector = Redirector::new(long_link).unwrap();
+
+        assert_eq!(
+            redirector.long_path,
+            UrlPath::new(long_link.to_string()).unwrap()
+        );
+        assert_eq!(redirector.short_link, None);
+        assert_eq!(redirector.path, "s");
+    }
+
+    #[test]
+    fn test_generate_short_link() {
+        let mut redirector = Redirector::new("/some/path").unwrap();
+
+        assert_eq!(redirector.short_link, None);
+
+        redirector.generate_short_link();
+
+        assert!(redirector.short_link.is_some());
+        let short_link = redirector.short_link.unwrap();
+        assert!(!short_link.is_empty());
+    }
+
+    #[test]
+    fn test_generate_short_link_unique() {
+        let mut redirector1 = Redirector::new("/some/path").unwrap();
+        let mut redirector2 = Redirector::new("/some/path").unwrap();
+
+        redirector1.generate_short_link();
+        thread::sleep(Duration::from_millis(1));
+        redirector2.generate_short_link();
+
+        assert_ne!(redirector1.short_link, redirector2.short_link);
+    }
+
+    #[test]
+    fn test_set_path() {
+        let mut redirector = Redirector::new("/some/path/").unwrap();
+
+        redirector.set_path("custom_path");
+        assert_eq!(redirector.path, "custom_path");
+
+        redirector.set_path("another/path".to_string());
+        assert_eq!(redirector.path, "another/path");
+    }
+
+    #[test]
+    fn test_display_without_short_link() {
+        let redirector = Redirector::new("some/path").unwrap();
+        let output = format!("{redirector}");
+
+        assert_eq!(output, "Short link not generated");
+    }
+
+    #[test]
+    fn test_display_with_short_link() {
+        let mut redirector = Redirector::new("some/path").unwrap();
+        redirector.short_link = Some("abc123".to_string());
+
+        let output = format!("{redirector}");
+
+        assert!(output.contains("<!DOCTYPE HTML>"));
+        assert!(output.contains("abc123"));
+        assert!(output.contains("meta http-equiv=\"refresh\""));
+        assert!(output.contains("window.location.href"));
+    }
+
+    #[test]
+    fn test_write_redirects_without_short_link() {
+        let redirector = Redirector::new("some/path").unwrap();
+
+        let result = redirector.write_redirects();
+
+        assert!(result.is_err());
+        match result.unwrap_err() {
+            RedirectorError::ShortLinkNotFound => (),
+            _ => panic!("Expected ShortLinkNotFound error"),
+        }
+    }
+
+    #[test]
+    fn test_write_redirects_success() {
+        let mut redirector = Redirector::new("some/path").unwrap();
+        redirector.set_path("test_output");
+        redirector.generate_short_link();
+
+        let result = redirector.write_redirects();
+        assert!(result.is_ok());
+
+        let short_link = redirector.short_link.as_ref().unwrap();
+        let file_path = format!("test_output/{short_link}.html");
+
+        assert!(Path::new(&file_path).exists());
+
+        let content = fs::read_to_string(&file_path).unwrap();
+        assert!(content.contains("<!DOCTYPE HTML>"));
+        assert!(content.contains(short_link));
+
+        fs::remove_file(&file_path).unwrap();
+        fs::remove_dir("test_output").unwrap();
+    }
+
+    #[test]
+    fn test_write_redirects_creates_directory() {
+        let mut redirector = Redirector::new("some/path").unwrap();
+        redirector.set_path("test_dir/subdir");
+        redirector.generate_short_link();
+
+        assert!(!Path::new("test_dir").exists());
+
+        let result = redirector.write_redirects();
+        assert!(result.is_ok());
+
+        assert!(Path::new("test_dir/subdir").exists());
+
+        let short_link = redirector.short_link.as_ref().unwrap();
+        let file_path = format!("test_dir/subdir/{short_link}.html");
+        assert!(Path::new(&file_path).exists());
+
+        fs::remove_file(&file_path).unwrap();
+        fs::remove_dir_all("test_dir").unwrap();
+    }
+
+    #[test]
+    fn test_redirector_clone() {
+        let mut redirector = Redirector::new("some/path").unwrap();
+        redirector.generate_short_link();
+        redirector.set_path("custom");
+
+        let cloned = redirector.clone();
+
+        assert_eq!(redirector, cloned);
+        assert_eq!(redirector.long_path, cloned.long_path);
+        assert_eq!(redirector.short_link, cloned.short_link);
+        assert_eq!(redirector.path, cloned.path);
+    }
+
+    #[test]
+    fn test_redirector_default() {
+        let redirector = Redirector::default();
+
+        assert_eq!(redirector.long_path, UrlPath::default());
+        assert_eq!(redirector.short_link, None);
+        assert_eq!(redirector.path, "");
     }
 }
