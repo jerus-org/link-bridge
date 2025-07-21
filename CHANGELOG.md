@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 📝 docs(redirector)-enhance module documentation(pr [#9])
 - 📝 docs(lib)-add comprehensive documentation for link-bridge(pr [#10])
 - 📝 BREAKING: docs(README)-update badge URLs and enhance documentation(pr [#11])
+- 👷 ci(circleci)-remove unnecessary parameters from save_next_version job(pr [#12])
 
 ### Fixed
 
@@ -36,3 +37,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#9]: https://github.com/jerus-org/link-bridge/pull/9
 [#10]: https://github.com/jerus-org/link-bridge/pull/10
 [#11]: https://github.com/jerus-org/link-bridge/pull/11
+[#12]: https://github.com/jerus-org/link-bridge/pull/12
