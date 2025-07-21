@@ -17,7 +17,7 @@ pub(crate) struct UrlPath(String);
 
 impl UrlPath {
     pub(crate) fn new(path: String) -> Result<Self, UrlPathError> {
-        static RE: Lazy<Regex> = Lazy::new(|| Regex::new(r"^/?[^/;?]+(?:/[^/;?]+)*/?$").unwrap());
+        static RE: Lazy<Regex> = Lazy::new(|| Regex::new(r"^/?[^/;#?]+(?:/[^/;#?]+)*/?$").unwrap());
 
         if !RE.is_match(&path) {
             return Err(UrlPathError::InvalidPath(path.clone()));
