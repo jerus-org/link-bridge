@@ -19,7 +19,7 @@
 //! redirector.set_path("doc_test_output");
 //!
 //! // Write the redirect HTML file
-//! redirector.write_redirects().unwrap();
+//! let redirect_path = redirector.write_redirect().unwrap();
 //!
 //! // Clean up test files
 //! fs::remove_dir_all("doc_test_output").ok();
@@ -170,7 +170,7 @@ impl Redirector {
     ///
     /// By default, redirector uses "s" as the output directory. Use this method
     /// to specify a custom directory path. The directory will be created automatically
-    /// when `write_redirects()` is called if it doesn't exist.
+    /// when `write_redirect()` is called if it doesn't exist.
     ///
     /// # Arguments
     ///
@@ -208,7 +208,7 @@ impl Redirector {
     ///
     /// # Returns
     ///
-    /// * `Ok(())` - If the file was successfully created and written
+    /// * `Ok(String)` - The path to the created redirect file if successful
     /// * `Err(RedirectorError::FileCreationError)` - If file operations fail
     ///
     /// # Errors
@@ -227,14 +227,14 @@ impl Redirector {
     ///
     /// let mut redirector = Redirector::new("api/v1/users").unwrap();
     /// redirector.set_path("doc_test_redirects");
-    /// 
+    ///
     /// // This creates: doc_test_redirects/{unique_name}.html
-    /// redirector.write_redirects().unwrap();
-    /// 
+    /// let redirect_path = redirector.write_redirect().unwrap();
+    ///
     /// // Clean up after the test
     /// fs::remove_dir_all("doc_test_redirects").ok();
     /// ```
-    pub fn write_redirects(&self) -> Result<(), RedirectorError> {
+    pub fn write_redirect(&self) -> Result<String, RedirectorError> {
         // create store directory if it doesn't exist
         if !Path::new(&self.path).exists() {
             fs::create_dir_all(&self.path)?;
@@ -247,7 +247,7 @@ impl Redirector {
         file.write_all(self.to_string().as_bytes())?;
         file.sync_all()?;
 
-        Ok(())
+        Ok(file_path.to_string_lossy().to_string())
     }
 }
 
@@ -353,10 +353,10 @@ mod tests {
     }
 
     #[test]
-    fn test_write_redirects_with_valid_path() {
+    fn test_write_redirect_with_valid_path() {
         let redirector = Redirector::new("some/path").unwrap();
 
-        let result = redirector.write_redirects();
+        let result = redirector.write_redirect();
 
         // Should succeed since short link is generated in new()
         assert!(result.is_ok());
@@ -371,14 +371,14 @@ mod tests {
     }
 
     #[test]
-    fn test_write_redirects_success() {
+    fn test_write_redirect_success() {
         let mut redirector = Redirector::new("some/path").unwrap();
         redirector.set_path("test_output");
 
-        let result = redirector.write_redirects();
+        let result = redirector.write_redirect();
         assert!(result.is_ok());
 
-        let file_path = redirector.path.join(&redirector.short_file_name);
+        let file_path = result.unwrap();
 
         assert!(Path::new(&file_path).exists());
 
@@ -394,18 +394,18 @@ mod tests {
     }
 
     #[test]
-    fn test_write_redirects_creates_directory() {
+    fn test_write_redirect_creates_directory() {
         let mut redirector = Redirector::new("some/path").unwrap();
         redirector.set_path("test_dir/subdir");
 
         assert!(!Path::new("test_dir").exists());
 
-        let result = redirector.write_redirects();
+        let result = redirector.write_redirect();
         assert!(result.is_ok());
 
         assert!(Path::new("test_dir/subdir").exists());
 
-        let file_path = redirector.path.join(&redirector.short_file_name);
+        let file_path = result.unwrap();
         assert!(Path::new(&file_path).exists());
 
         fs::remove_file(&file_path).unwrap();
@@ -432,6 +432,25 @@ mod tests {
         assert_eq!(redirector.long_path, UrlPath::default());
         assert_eq!(redirector.path, PathBuf::new());
         assert!(redirector.short_file_name.is_empty());
+    }
+
+    #[test]
+    fn test_write_redirect_returns_correct_path() {
+        let mut redirector = Redirector::new("some/path").unwrap();
+        redirector.set_path("test_path_output");
+
+        let result = redirector.write_redirect();
+        assert!(result.is_ok());
+
+        let returned_path = result.unwrap();
+        let expected_path = redirector.path.join(&redirector.short_file_name);
+
+        assert_eq!(returned_path, expected_path.to_string_lossy());
+        assert!(Path::new(&returned_path).exists());
+
+        // Clean up
+        fs::remove_file(&returned_path).unwrap();
+        fs::remove_dir("test_path_output").unwrap();
     }
 
     #[test]
