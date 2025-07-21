@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Create FUNDING.yml(pr [#3])
 - Configure Mend Bolt for GitHub(pr [#1])
 - 🌐 i18n(contributing): update spelling to en-GB in contributing guide(pr [#4])
+- 📝 docs(url_path)-add module-level documentation for UrlPath utilities(pr [#8])
 
 ### Fixed
 
@@ -28,3 +29,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#5]: https://github.com/jerus-org/link-bridge/pull/5
 [#6]: https://github.com/jerus-org/link-bridge/pull/6
 [#7]: https://github.com/jerus-org/link-bridge/pull/7
+[#8]: https://github.com/jerus-org/link-bridge/pull/8
