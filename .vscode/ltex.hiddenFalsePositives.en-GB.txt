@@ -1,3 +1,5 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlink-bridge\\E$"}
 {"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q[Crates.io]crates-url [Documentation]docs-url [circleci-badge]circleci-url [MIT licensed]mit-url [Rust 1.81+]version-url [BuyMeaCoffee]bmac-url [GitHubSponsors]ghub-url\\E$"}
 {"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q📚 Documentation on docs.rs\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\Q✨ add redirector module for URL shortening(pr #5)\\E$"}
+{"rule":"SPACE_BEFORE_PARENTHESIS","sentence":"^\\Q📝 docs(url_path)-add module-level documentation for UrlPath utilities(pr #8)\n📝 docs(redirector)-enhance module documentation(pr #9)\n📝 docs(lib)-add comprehensive documentation for link-bridge(pr #10)\n📝 BREAKING: docs(README)-update badge URLs and enhance documentation(pr #11)\n👷 ci(circleci)-remove unnecessary parameters from save_next_version job(pr #12)\n👷 ci(circleci)-remove unused parameters from config(pr #13)\\E$"}

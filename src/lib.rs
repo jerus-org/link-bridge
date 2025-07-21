@@ -23,7 +23,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! link-bridge = "0.1"
+//! link-bridge = "0.2"
 //! ```
 //!
 //! ## Basic Usage
