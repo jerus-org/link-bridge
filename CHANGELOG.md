@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - 🔧 chore(release)-add release configuration file(pr [#14])
+- ♻️ refactor(redirector)-update method signatures and usage(pr [#15])
 
 ## [0.2.0] - 2025-07-21
 
@@ -51,7 +52,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#11]: https://github.com/jerus-org/link-bridge/pull/11
 [#12]: https://github.com/jerus-org/link-bridge/pull/12
 [#13]: https://github.com/jerus-org/link-bridge/pull/13
-[Unreleased]: https://github.com/jerus-org/nextsv/compare/v0.2.0...HEAD
-[0.2.0]: https://github.com/jerus-org/nextsv/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/jerus-org/nextsv/releases/tag/v0.1.0
 [#14]: https://github.com/jerus-org/link-bridge/pull/14
+[#15]: https://github.com/jerus-org/link-bridge/pull/15
+[Unreleased]: https://github.com/jerus-org/link-bridge/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/jerus-org/link-bridge/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/jerus-org/link-bridge/releases/tag/v0.1.0
