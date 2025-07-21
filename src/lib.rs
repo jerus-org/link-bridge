@@ -39,7 +39,7 @@
 //! redirector.set_path("redirects");
 //!
 //! // Generate the redirect HTML file
-//! redirector.write_redirects().unwrap();
+//! let redirect_path = redirector.write_redirect().unwrap();
 //!
 //! // Clean up for example
 //! fs::remove_dir_all("redirects").ok();

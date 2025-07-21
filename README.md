@@ -57,7 +57,7 @@ let mut redirector = Redirector::new("api/v1/users").unwrap();
 redirector.set_path("redirects");
 
 // Generate the redirect HTML file
-redirector.write_redirects().unwrap();
+let redirect_path = redirector.write_redirect().unwrap();
 ```
 
 This creates an HTML file that automatically redirects visitors from your short URL to the longer target path using multiple redirect methods for maximum compatibility.
