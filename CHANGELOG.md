@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- ✨ add registry system to manage redirects(pr [#16])
+
 ### Changed
 
 - 🔧 chore(release)-add release configuration file(pr [#14])
@@ -54,6 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#13]: https://github.com/jerus-org/link-bridge/pull/13
 [#14]: https://github.com/jerus-org/link-bridge/pull/14
 [#15]: https://github.com/jerus-org/link-bridge/pull/15
+[#16]: https://github.com/jerus-org/link-bridge/pull/16
 [Unreleased]: https://github.com/jerus-org/link-bridge/compare/v0.2.0...HEAD
 [0.2.0]: https://github.com/jerus-org/link-bridge/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/jerus-org/link-bridge/releases/tag/v0.1.0
