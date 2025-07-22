@@ -14,6 +14,7 @@
 //! - 🔧 **Simple API** - Easy-to-use interface for creating redirects
 //! - 🎯 **URL validation** - Ensures paths contain only valid characters
 //! - 📁 **Automatic file management** - Creates directories and HTML files automatically
+//! - 📋 **Registry system** - Prevents duplicate redirects and ensures consistency
 //! - 🌐 **Standards compliant** - Generates proper HTML5 with multiple redirect methods
 //! - 🔒 **Safe** - Built with Rust's memory safety and error handling
 //!
@@ -52,11 +53,13 @@
 //!
 //! 1. **URL Validation**: Input paths are validated to ensure they contain only safe characters
 //! 2. **Unique Naming**: Short file names are generated using base62 encoding and timestamps
-//! 3. **HTML Generation**: Complete HTML5 pages are created with multiple redirect methods:
+//! 3. **Registry Check**: System checks if a redirect for this URL path already exists
+//! 4. **HTML Generation**: Complete HTML5 pages are created with multiple redirect methods:
 //!    - Meta refresh tag (universal browser support)
 //!    - JavaScript redirect (faster when JS is enabled)
 //!    - Manual fallback link (accessibility and fail-safe)
-//! 4. **File Management**: Directories are created automatically and files are written to disk
+//! 5. **File Management**: Directories are created automatically and files are written to disk
+//! 6. **Registry Update**: The registry is updated to track the new redirect mapping
 //!
 //! ## Generated HTML Structure
 //!
