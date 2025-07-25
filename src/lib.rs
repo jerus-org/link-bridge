@@ -24,7 +24,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! link-bridge = "0.2.1"
+//! link-bridge = "0.2.2"
 //! ```
 //!
 //! ## Basic Usage
