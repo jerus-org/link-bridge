@@ -363,7 +363,7 @@ impl fmt::Display for Redirector {
 
     <body>
         <!-- Note: don't tell people to `click` the link, just tell them that it is a link. -->
-        If you are not redirected automatically, follow this <a href='{target}'>link to example</a>.
+        If you are not redirected automatically, follow this <a href='{target}'>link to page</a>.
     </body>
 
     </html>
