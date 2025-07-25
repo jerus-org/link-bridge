@@ -324,7 +324,10 @@ impl Redirector {
                 file_path.to_string_lossy().to_string(),
             );
 
-            serde_json::to_writer(File::create(self.path.join(REDIRECT_REGISTRY))?, &registry)?;
+            serde_json::to_writer_pretty(
+                File::create(self.path.join(REDIRECT_REGISTRY))?,
+                &registry,
+            )?;
 
             Ok(file_path.to_string_lossy().to_string())
         }
@@ -348,7 +351,7 @@ impl fmt::Display for Redirector {
             r#"
     <!DOCTYPE HTML>
     <html lang="en-US">
-    
+
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="refresh" content="0; url={target}">
@@ -357,12 +360,12 @@ impl fmt::Display for Redirector {
         </script>
         <title>Page Redirection</title>
     </head>
-    
+
     <body>
         <!-- Note: don't tell people to `click` the link, just tell them that it is a link. -->
         If you are not redirected automatically, follow this <a href='{target}'>link to example</a>.
     </body>
-    
+
     </html>
     "#
         )
