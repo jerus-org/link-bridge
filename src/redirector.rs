@@ -313,8 +313,7 @@ impl Redirector {
             // A link already exists for this path, return the existing file path
             Ok(existing_path.clone())
         } else {
-            let file_name = file_path.to_string_lossy();
-            let mut file = File::create(file_name.as_ref())?;
+            let mut file = File::create(&file_path)?;
 
             file.write_all(self.to_string().as_bytes())?;
             file.sync_all()?;
