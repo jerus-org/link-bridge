@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - ♻️ refactor(redirector)-simplify file creation logic(pr [#18])
+- 📝 docs(redirector)-add documentation for short_file_name method(pr [#19])
 
 ## [0.2.2] - 2025-07-25
 
@@ -73,6 +74,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#16]: https://github.com/jerus-org/link-bridge/pull/16
 [#17]: https://github.com/jerus-org/link-bridge/pull/17
 [#18]: https://github.com/jerus-org/link-bridge/pull/18
+[#19]: https://github.com/jerus-org/link-bridge/pull/19
 [Unreleased]: https://github.com/jerus-org/link-bridge/compare/v0.2.2...HEAD
 [0.2.2]: https://github.com/jerus-org/link-bridge/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/jerus-org/link-bridge/compare/v0.2.0...v0.2.1
