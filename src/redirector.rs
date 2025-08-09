@@ -184,6 +184,25 @@ impl Redirector {
         OsString::from(format!("{name}.html"))
     }
 
+    /// Reports the short file name of the redirect HTML file.
+    ///
+    /// # Returns
+    ///
+    /// An `OsString` containing the generated file name with `.html` extension.
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use link_bridge::Redirector;
+    ///
+    /// let redirector = Redirector::new("api/v1").unwrap();
+    ///
+    /// assert_eq!(redirector.short_file_name(), OsString::from("12aaBB.html"));
+    /// ```
+    pub fn short_file_name(&self) -> OsString {
+        self.short_file_name.clone()
+    }
+
     /// Sets the output directory where redirect HTML files will be stored.
     ///
     /// By default, redirector uses "s" as the output directory. Use this method
