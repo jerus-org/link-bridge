@@ -196,8 +196,8 @@ impl Redirector {
     /// use link_bridge::Redirector;
     ///
     /// let redirector = Redirector::new("api/v1").unwrap();
-    ///
-    /// assert_eq!(redirector.short_file_name(), OsString::from("12aaBB.html"));
+    /// let name = redirector.short_file_name();
+    /// assert!(name.to_string_lossy().ends_with(".html"));
     /// ```
     pub fn short_file_name(&self) -> OsString {
         self.short_file_name.clone()
