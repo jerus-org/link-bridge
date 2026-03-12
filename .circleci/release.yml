@@ -46,3 +46,6 @@ workflows:
           package: link-bridge
           crate_tag_prefix: link-bridge-v
           context: [release, bot-check, pcu-app]
+      - toolkit/release_prlog:
+          requires: [release-link-bridge]
+          context: [release, bot-check, pcu-app]
