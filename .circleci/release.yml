@@ -34,7 +34,7 @@ workflows:
       - toolkit/calculate_versions:
           name: calculate-versions
           requires: [tools]
-          crates: "link-bridge:v"
+          crates: "link-bridge:link-bridge-v"
           crate_version_overrides: "link-bridge:<< pipeline.parameters.link_bridge_version >>"
           workspace_version_override: << pipeline.parameters.workspace_version >>
       - approve-release:
@@ -44,5 +44,5 @@ workflows:
           name: release-link-bridge
           requires: [approve-release]
           package: link-bridge
-          crate_tag_prefix: v
+          crate_tag_prefix: link-bridge-v
           context: [release, bot-check, pcu-app]
