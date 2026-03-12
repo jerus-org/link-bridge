@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - deps: update rust crate thiserror to 2.0.18(pr [#33])
 - deps: update rust crate regex to 1.12.3(pr [#34])
 - ci: add release_prlog step to create workspace v* tag(pr [#35])
+- revert cargo-release PRLOG change and remove PRLOG replacements(pr [#36])
 
 ## [0.2.3] - 2025-08-09
 
@@ -114,6 +115,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#33]: https://github.com/jerus-org/link-bridge/pull/33
 [#34]: https://github.com/jerus-org/link-bridge/pull/34
 [#35]: https://github.com/jerus-org/link-bridge/pull/35
+[#36]: https://github.com/jerus-org/link-bridge/pull/36
 [Unreleased]: https://github.com/jerus-org/link-bridge/compare/v0.2.3...HEAD
 [0.2.3]: https://github.com/jerus-org/link-bridge/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/jerus-org/link-bridge/compare/v0.2.1...v0.2.2
