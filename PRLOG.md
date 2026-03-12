@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - deps: update rust crate base62 to 2.2.3(pr [#29])
 - deps: update rust crate chrono to 0.4.44(pr [#30])
 - deps: update rust crate once_cell to 1.21.4(pr [#31])
+- deps: update rust crate serde_json to 1.0.149(pr [#32])
 
 ## [0.2.3] - 2025-08-09
 
@@ -106,6 +107,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#29]: https://github.com/jerus-org/link-bridge/pull/29
 [#30]: https://github.com/jerus-org/link-bridge/pull/30
 [#31]: https://github.com/jerus-org/link-bridge/pull/31
+[#32]: https://github.com/jerus-org/link-bridge/pull/32
 [Unreleased]: https://github.com/jerus-org/link-bridge/compare/v0.2.3...HEAD
 [0.2.3]: https://github.com/jerus-org/link-bridge/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/jerus-org/link-bridge/compare/v0.2.1...v0.2.2
