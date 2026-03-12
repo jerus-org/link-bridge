@@ -1,0 +1,48 @@
+version: 2.1
+
+parameters:
+  link_bridge_version:
+    type: string
+    default: ""
+    description: "Override crate version (empty = nextsv auto-detect)"
+  workspace_version:
+    type: string
+    default: ""
+    description: "Override workspace v* version (empty = nextsv auto-detect)"
+
+orbs:
+  toolkit: jerus-org/circleci-toolkit@4.9.5
+
+jobs:
+  tools:
+    executor:
+      name: toolkit/rust_env_rolling
+    steps:
+      - run:
+          name: Verify tools
+          command: |
+            set -ex
+            nextsv --version
+            pcu --version
+            cargo release --version
+            jq --version
+
+workflows:
+  release:
+    jobs:
+      - tools
+      - toolkit/calculate_versions:
+          name: calculate-versions
+          requires: [tools]
+          crates: "link-bridge:v"
+          crate_version_overrides: "link-bridge:<< pipeline.parameters.link_bridge_version >>"
+          workspace_version_override: << pipeline.parameters.workspace_version >>
+      - approve-release:
+          type: approval
+          requires: [calculate-versions]
+      - toolkit/release_crate:
+          name: release-link-bridge
+          requires: [approve-release]
+          package: link-bridge
+          crate_tag_prefix: v
+          context: [release, bot-check, pcu-app]
