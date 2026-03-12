@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - chore-update release.toml to reference PRLOG.md instead of CHANGELOG.md(pr [#21])
 - ci-migrate to 3-file pipeline model(pr [#25])
 - chore-migrate to workspace structure and add compliance files(pr [#26])
+- ci-bump circleci-toolkit to 4.9.6(pr [#37])
 
 ### Fixed
 
@@ -116,6 +117,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#34]: https://github.com/jerus-org/link-bridge/pull/34
 [#35]: https://github.com/jerus-org/link-bridge/pull/35
 [#36]: https://github.com/jerus-org/link-bridge/pull/36
+[#37]: https://github.com/jerus-org/link-bridge/pull/37
 [Unreleased]: https://github.com/jerus-org/link-bridge/compare/v0.2.3...HEAD
 [0.2.3]: https://github.com/jerus-org/link-bridge/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/jerus-org/link-bridge/compare/v0.2.1...v0.2.2
