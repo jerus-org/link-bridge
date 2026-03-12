@@ -5,7 +5,4 @@ pre-release-hook = ["./release-hook.sh"]
 pre-release-replacements = [
     { file = "README.md", search = "link-bridge = \"\\d+\\.\\d+\\.\\d+\"", replace = "link-bridge = \"{{version}}\"", exactly = 1 },
     { file = "src/lib.rs", search = "link-bridge = \"\\d+\\.\\d+\\.\\d+\"", replace = "link-bridge = \"{{version}}\"", exactly = 1 },
-    { file = "../../PRLOG.md", search = "## \\[Unreleased\\]", replace = "## [{{version}}] - {{date}}", exactly = 1 },
-    { file = "../../PRLOG.md", search = "\\[Unreleased\\]:", replace = "[{{version}}]:", exactly = 1 },
-    { file = "../../PRLOG.md", search = "\\.\\.\\.HEAD", replace = "...{{tag_name}}", exactly = 1 },
 ]
