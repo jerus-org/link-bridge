@@ -1,0 +1,25 @@
+[package]
+name = "link-bridge"
+version = "0.2.3"
+description = "A lightweight Rust library for creating URL redirects with short names that generate web pages redirecting to longer links on your website."
+readme = "README.md"
+keywords = ["redirect", "url", "short-link", "web", "rust"]
+categories = ["web-programming"]
+include = ["**/*.rs", "Cargo.toml", "README.md", "LICENSE"]
+publish = true
+edition.workspace = true
+authors.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+base62.workspace = true
+chrono.workspace = true
+once_cell.workspace = true
+regex.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+
+[lints]
+workspace = true

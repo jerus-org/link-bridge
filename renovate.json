@@ -1,0 +1,15 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "dependencyDashboard": true,
+  "rangeStrategy": "bump",
+  "semanticCommits": "enabled",
+  "semanticCommitType": "fix",
+  "prHourlyLimit": 0,
+  "versioning": "cargo",
+  "schedule": [
+    "* 0-5 17 * *"
+  ],
+  "extends": [
+    "github>jerusdp/renovate-config:default.json"
+  ]
+}

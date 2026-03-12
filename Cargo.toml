@@ -1,22 +1,21 @@
-[package]
-name = "link-bridge"
-version = "0.2.3"
+[workspace]
+members = ["crates/link-bridge"]
+resolver = "2"
+
+[workspace.package]
 edition = "2021"
 authors = ["Jeremiah Russell <jrussell@jerus.ie>"]
-description = "A lightweight Rust library for creating URL redirects with short names that generate web pages redirecting to longer links on your website."
 rust-version = "1.81"
 license = "MIT"
-readme = "README.md"
 repository = "https://github.com/jerus-org/link-bridge"
-keywords = ["redirect", "url", "short-link", "web", "rust"]
-include = ["src/**/*", "Cargo.toml", "README.md", "LICENSE"]
-categories = ["web-programming"]
-publish = true
 
-[dependencies]
+[workspace.dependencies]
 base62 = "2.2.1"
 chrono = "0.4.41"
 once_cell = "1.21.3"
 regex = "1.11.1"
 serde_json = "1.0.141"
 thiserror = "2.0.12"
+
+[workspace.lints.clippy]
+uninlined-format-args = "warn"
