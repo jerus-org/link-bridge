@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - chore-migrate CI to circleci-toolkit 6.0.0(pr [#39])
 
+### Fixed
+
+- deps: update rust crate base62 to 2.2.4(pr [#40])
+
 ## [0.3.0] - 2026-03-12
 
 ### Added
@@ -125,6 +129,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#36]: https://github.com/jerus-org/link-bridge/pull/36
 [#37]: https://github.com/jerus-org/link-bridge/pull/37
 [#39]: https://github.com/jerus-org/link-bridge/pull/39
+[#40]: https://github.com/jerus-org/link-bridge/pull/40
 [Unreleased]: https://github.com/jerus-org/link-bridge/compare/v0.3.0...HEAD
 [0.3.0]: https://github.com/jerus-org/link-bridge/compare/v0.2.3...v0.3.0
 [0.2.3]: https://github.com/jerus-org/link-bridge/compare/v0.2.2...v0.2.3
