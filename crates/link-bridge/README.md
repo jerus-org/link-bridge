@@ -43,7 +43,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-link-bridge = "0.2.4"
+link-bridge = "0.2.5"
 ```
 
 ### Basic Usage
