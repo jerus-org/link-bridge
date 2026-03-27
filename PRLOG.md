@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- chore-migrate CI to circleci-toolkit 6.0.0(pr [#39])
+
 ## [0.3.0] - 2026-03-12
 
 ### Added
@@ -118,6 +124,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#35]: https://github.com/jerus-org/link-bridge/pull/35
 [#36]: https://github.com/jerus-org/link-bridge/pull/36
 [#37]: https://github.com/jerus-org/link-bridge/pull/37
+[#39]: https://github.com/jerus-org/link-bridge/pull/39
+[Unreleased]: https://github.com/jerus-org/link-bridge/compare/v0.3.0...HEAD
 [0.3.0]: https://github.com/jerus-org/link-bridge/compare/v0.2.3...v0.3.0
 [0.2.3]: https://github.com/jerus-org/link-bridge/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/jerus-org/link-bridge/compare/v0.2.1...v0.2.2
