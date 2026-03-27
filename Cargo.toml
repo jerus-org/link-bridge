@@ -10,7 +10,7 @@ license = "MIT"
 repository = "https://github.com/jerus-org/link-bridge"
 
 [workspace.dependencies]
-base62 = "2.2.3"
+base62 = "2.2.4"
 chrono = "0.4.44"
 once_cell = "1.21.4"
 regex = "1.12.3"
