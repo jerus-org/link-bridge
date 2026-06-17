@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - deps: update dependency toolkit to v6.3.0(pr [#47])
 - deps: update rust crate chrono to 0.4.45(pr [#44])
 - deps: update rust crate regex to 1.12.4(pr [#45])
+- deps: update serde packages to 1.0.150(pr [#46])
 
 ## [0.3.1] - 2026-03-27
 
@@ -147,6 +148,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#47]: https://github.com/jerus-org/link-bridge/pull/47
 [#44]: https://github.com/jerus-org/link-bridge/pull/44
 [#45]: https://github.com/jerus-org/link-bridge/pull/45
+[#46]: https://github.com/jerus-org/link-bridge/pull/46
 [Unreleased]: https://github.com/jerus-org/link-bridge/compare/v0.3.1...HEAD
 [0.3.1]: https://github.com/jerus-org/link-bridge/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/jerus-org/link-bridge/compare/v0.2.3...v0.3.0
