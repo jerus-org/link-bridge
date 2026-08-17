@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - chore-remove redundant toolkit/label job(pr [#50])
 
+### Fixed
+
+- deps: update dependency toolkit to v7(pr [#55])
+
 ## [0.3.2] - 2026-06-19
 
 ### Fixed
@@ -158,6 +162,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#46]: https://github.com/jerus-org/link-bridge/pull/46
 [#48]: https://github.com/jerus-org/link-bridge/pull/48
 [#50]: https://github.com/jerus-org/link-bridge/pull/50
+[#55]: https://github.com/jerus-org/link-bridge/pull/55
 [Unreleased]: https://github.com/jerus-org/link-bridge/compare/v0.3.2...HEAD
 [0.3.2]: https://github.com/jerus-org/link-bridge/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/jerus-org/link-bridge/compare/v0.3.0...v0.3.1
