@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - deps: update dependency toolkit to v7.4.0(pr [#58])
+- deps: lock file maintenance(pr [#56])
 
 ## [0.3.3] - 2026-08-17
 
@@ -178,6 +179,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#52]: https://github.com/jerus-org/link-bridge/pull/52
 [#54]: https://github.com/jerus-org/link-bridge/pull/54
 [#58]: https://github.com/jerus-org/link-bridge/pull/58
+[#56]: https://github.com/jerus-org/link-bridge/pull/56
 [Unreleased]: https://github.com/jerus-org/link-bridge/compare/v0.3.3...HEAD
 [0.3.3]: https://github.com/jerus-org/link-bridge/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/jerus-org/link-bridge/compare/v0.3.1...v0.3.2
