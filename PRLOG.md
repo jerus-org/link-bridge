@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - deps: update rust crate base62 to 2.2.6(pr [#57])
 - deps: lock file maintenance(pr [#59])
 - deps: update rust crate thiserror to 2.0.21(pr [#61])
+- deps: update rust crate serde_json to 1.0.154(pr [#60])
 
 ## [0.3.3] - 2026-08-17
 
@@ -186,6 +187,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#57]: https://github.com/jerus-org/link-bridge/pull/57
 [#59]: https://github.com/jerus-org/link-bridge/pull/59
 [#61]: https://github.com/jerus-org/link-bridge/pull/61
+[#60]: https://github.com/jerus-org/link-bridge/pull/60
 [Unreleased]: https://github.com/jerus-org/link-bridge/compare/v0.3.3...HEAD
 [0.3.3]: https://github.com/jerus-org/link-bridge/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/jerus-org/link-bridge/compare/v0.3.1...v0.3.2
