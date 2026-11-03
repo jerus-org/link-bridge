@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- deps: lock file maintenance(pr [#64])
+
 ## [0.3.4] - 2026-10-26
 
 ### Fixed
@@ -192,6 +198,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#60]: https://github.com/jerus-org/link-bridge/pull/60
 [#62]: https://github.com/jerus-org/link-bridge/pull/62
 [#63]: https://github.com/jerus-org/link-bridge/pull/63
+[#64]: https://github.com/jerus-org/link-bridge/pull/64
+[Unreleased]: https://github.com/jerus-org/link-bridge/compare/v0.3.4...HEAD
 [0.3.4]: https://github.com/jerus-org/link-bridge/compare/v0.3.3...v0.3.4
 [0.3.3]: https://github.com/jerus-org/link-bridge/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/jerus-org/link-bridge/compare/v0.3.1...v0.3.2
