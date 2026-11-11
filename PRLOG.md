@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - deps: lock file maintenance(pr [#64])
+- deps: lock file maintenance(pr [#65])
 
 ## [0.3.4] - 2026-10-26
 
@@ -199,6 +200,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#62]: https://github.com/jerus-org/link-bridge/pull/62
 [#63]: https://github.com/jerus-org/link-bridge/pull/63
 [#64]: https://github.com/jerus-org/link-bridge/pull/64
+[#65]: https://github.com/jerus-org/link-bridge/pull/65
 [Unreleased]: https://github.com/jerus-org/link-bridge/compare/v0.3.4...HEAD
 [0.3.4]: https://github.com/jerus-org/link-bridge/compare/v0.3.3...v0.3.4
 [0.3.3]: https://github.com/jerus-org/link-bridge/compare/v0.3.2...v0.3.3
